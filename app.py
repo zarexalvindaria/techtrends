@@ -1,5 +1,5 @@
 import sqlite3
-
+import logging
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
 
@@ -30,6 +30,7 @@ def count_post():
     return post_count[0]
 
 
+# Function to count the total connection to the database
 def count_db_connection():
     connection = sqlite3.connect('database.db')
     cursor = connection.cursor()
@@ -68,10 +69,12 @@ If the post ID is not found a 404 page is shown '''
 @app.route('/<int:post_id>')
 def post(post_id):
     post = get_post(post_id)
+    # Increment the db connection
     increment_db_connection(post_id)
     if post is None:
         return render_template('404.html'), 404
     else:
+        app.logger.info('Article ' + '"' + post['title'] + '"' + ' retrieved!')
         return render_template('post.html', post=post)
 
 
@@ -121,13 +124,19 @@ def metrics():
         status=200,
         mimetype='application/json'
     )
-    print(count_db_connection())
     return response
 
 
 # start the application on port 3111
 if __name__ == "__main__":
     # app.run(host='0.0.0.0', port='3111')
+
+    # Create the log file and format each log
+    logging.basicConfig(
+        format='%(levelname)s:%(name)s:%(asctime)s, %(message)s',
+        filename='app.log', level=logging.DEBUG,
+        datefmt='%m-%d-%Y, %H:%M:%S'
+    )
 
     # Created a new line with the localhost since 0.0.0.0 does not work in Windows
     app.run(host='127.0.0.1', port='3111')

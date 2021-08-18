@@ -1,0 +1,17 @@
+2021-08-19 06:22:47,  * Running on http://127.0.0.1:3111/ (Press CTRL+C to quit)
+2021-08-19 06:22:55, 127.0.0.1 - - [19/Aug/2021 06:22:55] "GET / HTTP/1.1" 200 -
+2021-08-19 06:23:02, 2020 CNCF Annual Report retrieved!
+2021-08-19 06:23:02, 127.0.0.1 - - [19/Aug/2021 06:23:02] "GET /1 HTTP/1.1" 200 -
+2021-08-19 06:25:37,  * Running on http://127.0.0.1:3111/ (Press CTRL+C to quit)
+2021-08-19 06:25:39, 127.0.0.1 - - [19/Aug/2021 06:25:39] "GET /1 HTTP/1.1" 200 -
+2021-08-19 06:26:03,  * Running on http://127.0.0.1:3111/ (Press CTRL+C to quit)
+2021-08-19 06:26:05, Article "2020 CNCF Annual Report" retrieved!
+2021-08-19 06:26:05, 127.0.0.1 - - [19/Aug/2021 06:26:05] "GET /1 HTTP/1.1" 200 -
+2021-08-19 06:26:07, Article "2020 CNCF Annual Report" retrieved!
+2021-08-19 06:26:07, 127.0.0.1 - - [19/Aug/2021 06:26:07] "GET /1 HTTP/1.1" 200 -
+INFO:2021-08-19, 06:30:33,  * Running on http://127.0.0.1:3111/ (Press CTRL+C to quit)
+INFO:2021-08-19, 06:30:37, Article "2020 CNCF Annual Report" retrieved!
+INFO:2021-08-19, 06:30:37, 127.0.0.1 - - [19/Aug/2021 06:30:37] "GET /1 HTTP/1.1" 200 -
+INFO:werkzeug:08-19-2021, 06:55:57,  * Running on http://127.0.0.1:3111/ (Press CTRL+C to quit)
+INFO:app:08-19-2021, 06:56:00, Article "2020 CNCF Annual Report" retrieved!
+INFO:werkzeug:08-19-2021, 06:56:00, 127.0.0.1 - - [19/Aug/2021 06:56:00] "GET /1 HTTP/1.1" 200 -
