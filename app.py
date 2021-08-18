@@ -3,9 +3,6 @@ import sqlite3
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
 
-# Initialize the global var connection count
-connection_count = 0
-
 
 # Function to get a database connection.
 # This function connects to database with the name `database.db`
@@ -17,11 +14,9 @@ def get_db_connection():
 
 # Function to get a post using its ID
 def get_post(post_id):
-    global connection_count  # global variable for connection count
     connection = get_db_connection()
     post = connection.execute('SELECT * FROM posts WHERE id = ?',
                               (post_id,)).fetchone()
-    connection_count += 1
     connection.close()
     return post
 
@@ -33,6 +28,24 @@ def count_post():
     post_count = cursor.execute('SELECT COUNT(id) FROM posts').fetchone()
     connection.close()
     return post_count[0]
+
+
+def count_db_connection():
+    connection = sqlite3.connect('database.db')
+    cursor = connection.cursor()
+    db_connection_count = cursor.execute('SELECT SUM(connection) FROM posts').fetchall()
+    connection.close()
+    return db_connection_count[0][0]
+
+
+# Function to increment database connection by 1 per article visit
+def increment_db_connection(post_id):
+    connection = get_db_connection()
+    cur = connection.cursor()
+    cur.execute('UPDATE posts SET connection = connection + 1 WHERE id = ?',
+                (post_id,)).fetchone()
+    connection.commit()
+    connection.close()
 
 
 # Define the Flask application
@@ -49,11 +62,13 @@ def index():
     return render_template('index.html', posts=posts)
 
 
-# Define how each individual article is rendered
-# If the post ID is not found a 404 page is shown
+''' 
+Define how each individual article is rendered and increment the db connection count by 1 per article visit.
+If the post ID is not found a 404 page is shown '''
 @app.route('/<int:post_id>')
 def post(post_id):
     post = get_post(post_id)
+    increment_db_connection(post_id)
     if post is None:
         return render_template('404.html'), 404
     else:
@@ -102,10 +117,11 @@ def healthz():
 @app.route('/metrics')
 def metrics():
     response = app.response_class(
-        response=json.dumps({"db_connection_count": connection_count, "post_count": count_post()}),
+        response=json.dumps({"db_connection_count": count_db_connection(), "post_count": count_post()}),
         status=200,
         mimetype='application/json'
     )
+    print(count_db_connection())
     return response
 
 
