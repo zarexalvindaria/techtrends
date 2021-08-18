@@ -72,9 +72,11 @@ def post(post_id):
     # Increment the db connection
     increment_db_connection(post_id)
     if post is None:
+        # Log accessing non-existing article
         app.logger.info('A non-existing article is accessed! "404"')
         return render_template('404.html'), 404
     else:
+        # Log accessing existing article
         app.logger.info('Article ' + '"' + post['title'] + '"' + ' retrieved!')
         return render_template('post.html', post=post)
 
@@ -82,6 +84,7 @@ def post(post_id):
 # Define the About Us page
 @app.route('/about')
 def about():
+    # Log accessing About Us page
     app.logger.info('"About Us" page was retrieved!')
     return render_template('about.html')
 
@@ -102,6 +105,8 @@ def create():
             connection.commit()
             connection.close()
 
+            # Log newly created article
+            app.logger.info('A new article ' + '"' + title + '"' + ' was created!')
             return redirect(url_for('index'))
 
     return render_template('create.html')
