@@ -3,6 +3,9 @@ import sqlite3
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
 
+# Initialize the global var connection count
+connection_count = 0
+
 
 # Function to get a database connection.
 # This function connects to database with the name `database.db`
@@ -14,11 +17,14 @@ def get_db_connection():
 
 # Function to get a post using its ID
 def get_post(post_id):
+    global connection_count  # global variable for connection count
     connection = get_db_connection()
     post = connection.execute('SELECT * FROM posts WHERE id = ?',
                               (post_id,)).fetchone()
+    connection_count += 1
     connection.close()
     return post
+
 
 # Function to count the number of posts in the database
 def count_post():
@@ -96,7 +102,7 @@ def healthz():
 @app.route('/metrics')
 def metrics():
     response = app.response_class(
-        response=json.dumps({"db_connection_count": "$db_count_here", "post_count": count_post()}),
+        response=json.dumps({"db_connection_count": connection_count, "post_count": count_post()}),
         status=200,
         mimetype='application/json'
     )
