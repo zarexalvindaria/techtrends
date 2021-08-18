@@ -65,7 +65,8 @@ def index():
 
 ''' 
 Define how each individual article is rendered and increment the db connection count by 1 per article visit.
-If the post ID is not found a 404 page is shown '''
+If the post ID is not found a 404 page is shown 
+'''
 @app.route('/<int:post_id>')
 def post(post_id):
     post = get_post(post_id)
@@ -100,8 +101,8 @@ def create():
             flash('Title is required!')
         else:
             connection = get_db_connection()
-            connection.execute('INSERT INTO posts (title, content) VALUES (?, ?)',
-                               (title, content))
+            connection.execute('INSERT INTO posts (title, content, connection ) VALUES (?, ?, ?)',
+                               (title, content, '0'))
             connection.commit()
             connection.close()
 
