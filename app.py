@@ -24,7 +24,7 @@ def get_post(post_id):
 def count_post():
     connection = sqlite3.connect('database.db')
     cursor = connection.cursor()
-    post_count = cursor.execute('SELECT COUNT() FROM posts').fetchone()
+    post_count = cursor.execute('SELECT COUNT(id) FROM posts').fetchone()
     connection.close()
     return post_count[0]
 
@@ -106,4 +106,6 @@ def metrics():
 # start the application on port 3111
 if __name__ == "__main__":
     # app.run(host='0.0.0.0', port='3111')
+
+    # Created a new line with the localhost since 0.0.0.0 does not work in Windows
     app.run(host='127.0.0.1', port='3111')
