@@ -72,6 +72,7 @@ def post(post_id):
     # Increment the db connection
     increment_db_connection(post_id)
     if post is None:
+        app.logger.info('A non-existing article is accessed! "404"')
         return render_template('404.html'), 404
     else:
         app.logger.info('Article ' + '"' + post['title'] + '"' + ' retrieved!')
@@ -134,7 +135,7 @@ if __name__ == "__main__":
     # Create the log file and format each log
     logging.basicConfig(
         format='%(levelname)s:%(name)s:%(asctime)s, %(message)s',
-        filename='app.log', level=logging.DEBUG,
+        level=logging.DEBUG,
         datefmt='%m-%d-%Y, %H:%M:%S'
     )
 
