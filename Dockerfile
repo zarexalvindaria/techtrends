@@ -1,4 +1,4 @@
-FROM python:3.8
+FROM python:3.9-alpine
 LABEL maintainer="Zarex Alvin Daria"
 
 COPY . /app
@@ -8,3 +8,4 @@ RUN pip install -r requirements.txt
 # command to run on container start
 CMD [ "python", "__init__.py" ]
 CMD [ "python", "app.py" ]
+EXPOSE 3111

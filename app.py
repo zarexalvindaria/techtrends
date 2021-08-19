@@ -137,7 +137,7 @@ def metrics():
 
 # start the application on port 3111
 if __name__ == "__main__":
-    # app.run(host='0.0.0.0', port='3111')
+
 
     # Create the log file and format each log
     logging.basicConfig(
@@ -146,5 +146,7 @@ if __name__ == "__main__":
         datefmt='%m-%d-%Y, %H:%M:%S'
     )
 
-    # Created a new line with the localhost since 0.0.0.0 does not work in Windows
-    app.run(host='127.0.0.1', port='3111')
+    app.run(host='0.0.0.0', port='3111')
+
+    # Created a new line for testing with the Windows localhost since 0.0.0.0 does not work in Windows
+    # app.run(host='127.0.0.1', port='3111')
