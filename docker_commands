@@ -1,2 +1,11 @@
+## Docker commands used to build the application
 docker build -t techtrends .
+
+## Docker commands used to run the application
 docker run -d -p 7111:3111 techtrends
+
+## Docker commands used to get the application logs
+# TODO: insert the docker logs command
+
+## Logs from the container running the TechTrends application
+# TODO: paste logs from the Docker container
