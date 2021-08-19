@@ -1,11 +1,43 @@
 ## Docker commands used to build the application
 docker build -t techtrends .
 
+
 ## Docker commands used to run the application
 docker run -d -p 7111:3111 techtrends
 
+
 ## Docker commands used to get the application logs
-# TODO: insert the docker logs command
+docker container logs hungry_ride
+
 
 ## Logs from the container running the TechTrends application
 # TODO: paste logs from the Docker container
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+INFO:werkzeug:08-19-2021, 18:51:30,  * Running on http://0.0.0.0:3111/ (Press CTRL+C to quit)
+INFO:werkzeug:08-19-2021, 18:51:42, 172.17.0.1 - - [19/Aug/2021 18:51:42] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:08-19-2021, 18:51:42, 172.17.0.1 - - [19/Aug/2021 18:51:42] "GET /static/css/main.css HTTP/1.1" 200 -
+INFO:werkzeug:08-19-2021, 18:51:42, 172.17.0.1 - - [19/Aug/2021 18:51:42] "GET /favicon.ico HTTP/1.1" 404 -
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+INFO:werkzeug:08-19-2021, 20:05:41,  * Running on http://0.0.0.0:3111/ (Press CTRL+C to quit)
+INFO:werkzeug:08-19-2021, 20:05:46, 172.17.0.1 - - [19/Aug/2021 20:05:46] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:08-19-2021, 20:07:58, 172.17.0.1 - - [19/Aug/2021 20:07:58] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug:08-19-2021, 20:08:43, 172.17.0.1 - - [19/Aug/2021 20:08:43] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug:08-19-2021, 20:13:23, 172.17.0.1 - - [19/Aug/2021 20:13:23] "GET / HTTP/1.1" 200 -
+INFO:app:08-19-2021, 20:18:10, Article "2020 CNCF Annual Report" retrieved!
+INFO:werkzeug:08-19-2021, 20:18:10, 172.17.0.1 - - [19/Aug/2021 20:18:10] "GET /1 HTTP/1.1" 200 -
+INFO:app:08-19-2021, 20:18:34, "About Us" page was retrieved!
+INFO:werkzeug:08-19-2021, 20:18:34, 172.17.0.1 - - [19/Aug/2021 20:18:34] "GET /about HTTP/1.1" 200 -
+INFO:werkzeug:08-19-2021, 20:18:43, 172.17.0.1 - - [19/Aug/2021 20:18:43] "GET /create HTTP/1.1" 200 -
+INFO:app:08-19-2021, 20:18:58, A new article "Test Post" was created!
+INFO:werkzeug:08-19-2021, 20:18:58, 172.17.0.1 - - [19/Aug/2021 20:18:58] "POST /create HTTP/1.1" 302 -
+INFO:werkzeug:08-19-2021, 20:18:59, 172.17.0.1 - - [19/Aug/2021 20:18:59] "GET / HTTP/1.1" 200 -
+INFO:app:08-19-2021, 20:19:09, A non-existing article was accessed! "404"
+INFO:werkzeug:08-19-2021, 20:19:09, 172.17.0.1 - - [19/Aug/2021 20:19:09] "GET /100 HTTP/1.1" 404 -
