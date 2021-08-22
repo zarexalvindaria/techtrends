@@ -1,4 +1,4 @@
-# Workflow for the techtrends app
+# Workflow (GitHub action) for the Techtrends app
 name: TechTrends - Package with Docker
 
 # Controls when the action will run. Triggers the workflow on push or pull request
@@ -14,7 +14,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called docker
-  docker:
+  ci-github-actions:
     runs-on: ubuntu-latest
     steps:
       -
