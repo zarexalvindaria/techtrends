@@ -1,0 +1,61 @@
+## Set the API endpoint used to create the Service resource.
+apiVersion: apps/v1
+## Define the type of the resource
+kind: Deployment
+## Set the parameters that make the object identifiable, such as its name, namespace, and labels.
+metadata:
+  name: techtrends
+  namespace: sandbox
+## Define the desired configuration for the resource.
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: techtrends
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: techtrends
+    spec:
+      containers:
+        - name: techtrends
+          image: techtrends:latest
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "64Mi"
+            limits:
+              cpu: "500m"
+              memory: "128Mi"
+          ports:
+            - containerPort: 3111
+          readinessProbe:
+            initialDelaySeconds: 1
+            periodSeconds: 2
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 1
+            httpGet:
+              host:
+              scheme: HTTP
+              path: /healthz
+              port: 3111
+          livenessProbe:
+            initialDelaySeconds: 1
+            periodSeconds: 2
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 1
+            httpGet:
+              host:
+              scheme: HTTP
+              path: /healthz
+              port: 3111
+
+
+
