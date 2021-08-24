@@ -4,6 +4,9 @@ apiVersion: apps/v1
 kind: Deployment
 ## Set the parameters that make the object identifiable, such as its name, namespace, and labels.
 metadata:
+  labels:
+    app: techtrends
+    tag: techtrends
   name: techtrends
   namespace: sandbox
 ## Define the desired configuration for the resource.
@@ -12,6 +15,7 @@ spec:
   selector:
     matchLabels:
       app: techtrends
+      tag: techtrends
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -21,10 +25,12 @@ spec:
     metadata:
       labels:
         app: techtrends
+        tag: techtrends
     spec:
       containers:
         - name: techtrends
           image: techtrends:latest
+          imagePullPolicy: IfNotPresent
           resources:
             requests:
               cpu: "250m"
