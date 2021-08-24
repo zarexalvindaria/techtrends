@@ -25,9 +25,9 @@ spec:
         app: techtrends
     spec:
       containers:
-        - name: techtrends
-          image: zarexalvindaria/techtrends:latest
+        - image: zarexalvindaria/techtrends:latest
           imagePullPolicy: IfNotPresent
+          name: techtrends
           resources:
             requests:
               cpu: "250m"
