@@ -6,7 +6,6 @@ kind: Deployment
 metadata:
   labels:
     app: techtrends
-    tag: techtrends
   name: techtrends
   namespace: sandbox
 ## Define the desired configuration for the resource.
@@ -15,7 +14,6 @@ spec:
   selector:
     matchLabels:
       app: techtrends
-      tag: techtrends
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -25,11 +23,10 @@ spec:
     metadata:
       labels:
         app: techtrends
-        tag: techtrends
     spec:
       containers:
         - name: techtrends
-          image: techtrends:latest
+          image: zarexalvindaria/techtrends:latest
           imagePullPolicy: IfNotPresent
           resources:
             requests:
