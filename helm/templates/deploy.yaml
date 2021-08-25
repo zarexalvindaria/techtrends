@@ -7,10 +7,10 @@ metadata:
   labels:
     app: techtrends
   name: techtrends
-  namespace: sandbox
+  namespace: {{ .Values.namespace.name }}
 ## Define the desired configuration for the resource.
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: techtrends
@@ -25,18 +25,18 @@ spec:
         app: techtrends
     spec:
       containers:
-        - image: zarexalvindaria/techtrends:latest
-          imagePullPolicy: IfNotPresent
+        - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.imagePullPolicy }}
           name: techtrends
           resources:
             requests:
-              cpu: "250m"
-              memory: "64Mi"
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
             limits:
-              cpu: "500m"
-              memory: "128Mi"
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
           ports:
-            - containerPort: 3111
+            - containerPort: {{ .Values.ports.containerPort  }}
           readinessProbe:
             initialDelaySeconds: 1
             periodSeconds: 2
@@ -46,7 +46,7 @@ spec:
             httpGet:
               host:
               scheme: HTTP
-              path: /healthz
+              path: {{ .Values.readinessProbe.path }}
               port: 3111
           livenessProbe:
             initialDelaySeconds: 1
@@ -57,7 +57,7 @@ spec:
             httpGet:
               host:
               scheme: HTTP
-              path: /healthz
+              path: {{ .Values.livenessProbe.path }}
               port: 3111
 
 
