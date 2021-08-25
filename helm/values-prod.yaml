@@ -5,5 +5,16 @@ namespace:
 service:
   port: 7111
 
+image:
+  imagePullPolicy: Always
+
 ## set the number of replicas for an application
 replicaCount: 5
+
+resources:
+  requests:
+    memory: "128Mi"
+    cpu: "350m"
+  limits:
+    memory: "256Mi"
+    cpu: "500m"

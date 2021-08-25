@@ -5,16 +5,13 @@ namespace:
 service:
   port: 5111
 
-image:
-  imagePullPolicy: Always
-
 ## set the number of replicas for an application
-replicaCount: 5
+replicaCount: 3
 
 resources:
   requests:
-    memory: "128Mi"
-    cpu: "350m"
+    memory: "90Mi"
+    cpu: "300m"
   limits:
-    memory: "256Mi"
+    memory: "128Mi"
     cpu: "500m"
