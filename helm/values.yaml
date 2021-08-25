@@ -1,0 +1,35 @@
+## provide the name of the namespace
+namespace:
+  name: sandbox
+
+service:
+  port: 4111
+  targetPort: 3111
+  protocol: TCP
+  type: ClusterIP
+
+## define the image to execute with the Deployment
+image:
+  repository: zarexalvindaria/techtrends
+  tag: latest
+  imagePullPolicy: IfNotPresent
+
+## set the number of replicas for an application
+replicaCount: 1
+
+resources:
+  requests:
+    memory: "64Mi"
+    cpu: "250m"
+  limits:
+    memory: "128Mi"
+    cpu: "500m"
+
+ports:
+  containerPort: 3111
+
+livenessProbe:
+  path: /healthz
+readinessProbe:
+  path: /healthz
+
