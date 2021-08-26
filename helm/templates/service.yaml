@@ -10,5 +10,6 @@ spec:
     protocol: {{ .Values.service.protocol }}
     targetPort: {{ .Values.service.protocol }}
   selector:
-    app: techtrends
+    matchLabels:
+      app: techtrends
   type: {{ .Values.service.type }}
