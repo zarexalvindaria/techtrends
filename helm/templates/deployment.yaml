@@ -1,14 +1,10 @@
-## Set the API endpoint used to create the Service resource.
 apiVersion: apps/v1
-## Define the type of the resource
 kind: Deployment
-## Set the parameters that make the object identifiable, such as its name, namespace, and labels.
 metadata:
   labels:
     app: techtrends
   name: techtrends
   namespace: {{ .Values.namespace.name }}
-## Define the desired configuration for the resource.
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
