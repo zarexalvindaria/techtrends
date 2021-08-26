@@ -30,14 +30,6 @@ spec:
           name: techtrends
           resources:
 {{ toYaml .Values.resources | indent 12 }}
-
-            '''
-            requests:
-              cpu: {{ .Values.resources.requests.cpu }}
-              memory: {{ .Values.resources.requests.memory }}
-            limits:
-              cpu: {{ .Values.resources.limits.cpu }}
-              memory: {{ .Values.resources.limits.memory }}
           ports:
             containerPort: {{ .Values.containerPort  }}
           readinessProbe:
@@ -62,4 +54,3 @@ spec:
               scheme: HTTP
               path: {{ .Values.livenessProbe.path }}
               port: {{ .Values.containerPort  }}
-              '''

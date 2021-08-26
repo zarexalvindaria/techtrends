@@ -15,4 +15,3 @@ spec:
     path: helm
     repoURL: https://github.com/zarexalvindaria/techtrends
     targetRevision: HEAD
-  syncPolicy: {}
