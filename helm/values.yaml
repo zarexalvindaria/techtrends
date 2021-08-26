@@ -10,7 +10,7 @@ service:
 
 ## define the image to execute with the Deployment
 image:
-  repository: techtrends
+  repository: zarexlavindaria/techtrends
   tag: latest
   imagePullPolicy: IfNotPresent
 
