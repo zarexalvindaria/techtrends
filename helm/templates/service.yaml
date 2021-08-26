@@ -8,8 +8,7 @@ spec:
   ports:
   - port: {{ .Values.service.port }}
     protocol: {{ .Values.service.protocol }}
-    targetPort: {{ .Values.service.protocol }}
+    targetPort: {{ .Values.service.targetPort }}
   selector:
-    matchLabels:
-      app: techtrends
+    app: techtrends
   type: {{ .Values.service.type }}
