@@ -45,7 +45,7 @@ def count_db_connection():
 def update_db_connection(post_id):
     connection = get_db_connection()
     cur = connection.cursor()
-    cur.execute('UPDATE posts SET connection = connection + 1 WHERE id = ?',
+    cur.execute('UPDATE posts SET article_view = article_view + 1 WHERE id = ?',
                 (post_id,)).fetchone()
     connection.commit()
     connection.close()
