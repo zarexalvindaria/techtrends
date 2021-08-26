@@ -26,11 +26,11 @@ spec:
           name: techtrends
           resources:
             requests:
-              cpu: { { .Values.resources.requests.cpu } }
-              memory: { { .Values.resources.requests.memory } }
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
             limits:
-              cpu: { { .Values.resources.limits.cpu } }
-              memory: { { .Values.resources.limits.memory } }
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
           ports:
             containerPort: {{ .Values.containerPort  }}
           readinessProbe:
@@ -43,7 +43,7 @@ spec:
               host:
               scheme: HTTP
               path: {{ .Values.readinessProbe.path }}
-              port: {{ .Values.containerPort  }}
+              port: 3111
           livenessProbe:
             initialDelaySeconds: 1
             periodSeconds: 2
@@ -54,4 +54,4 @@ spec:
               host:
               scheme: HTTP
               path: {{ .Values.livenessProbe.path }}
-              port: {{ .Values.containerPort  }}
+              port: 3111
