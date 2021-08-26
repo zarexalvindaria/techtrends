@@ -36,7 +36,7 @@ spec:
               cpu: {{ .Values.resources.limits.cpu }}
               memory: {{ .Values.resources.limits.memory }}
           ports:
-            - containerPort: {{ .Values.ports.containerPort  }}
+            - containerPort: {{ .Values.containerPort  }}
           readinessProbe:
             initialDelaySeconds: 1
             periodSeconds: 2
@@ -47,7 +47,7 @@ spec:
               host:
               scheme: HTTP
               path: {{ .Values.readinessProbe.path }}
-              port: 3111
+              port: {{ .Values.containerPort  }}
           livenessProbe:
             initialDelaySeconds: 1
             periodSeconds: 2
@@ -58,7 +58,7 @@ spec:
               host:
               scheme: HTTP
               path: {{ .Values.livenessProbe.path }}
-              port: 3111
+              port: {{ .Values.containerPort  }}
 
 
 

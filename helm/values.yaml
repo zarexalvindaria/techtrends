@@ -10,7 +10,7 @@ service:
 
 ## define the image to execute with the Deployment
 image:
-  repository: zarexalvindaria/techtrends
+  repository: techtrends
   tag: latest
   imagePullPolicy: IfNotPresent
 
@@ -25,8 +25,7 @@ resources:
     cpu: "500m"
     memory: "128Mi"
 
-ports:
-  containerPort: 3111
+containerPort: 3111
 
 livenessProbe:
   path: /healthz
