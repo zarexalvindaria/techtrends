@@ -5,5 +5,5 @@ CREATE TABLE posts (
     created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     title TEXT NOT NULL,
     content TEXT NOT NULL,
-    connection INTEGER
+    article_view INTEGER
 );

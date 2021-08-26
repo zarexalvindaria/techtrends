@@ -3,6 +3,7 @@ import logging
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
 
+homepage_view = 0
 
 # Function to get a database connection.
 # This function connects to database with the name `database.db`
@@ -34,13 +35,14 @@ def count_post():
 def count_db_connection():
     connection = sqlite3.connect('database.db')
     cursor = connection.cursor()
-    db_connection_count = cursor.execute('SELECT SUM(connection) FROM posts').fetchall()
+    db_connection_count = cursor.execute('SELECT SUM(article_view) FROM posts').fetchall()
     connection.close()
-    return db_connection_count[0][0]
+    db_connection_final_count = db_connection_count[0][0] + homepage_view
+    return db_connection_final_count
 
 
 # Function to increment database connection by 1 per article visit
-def increment_db_connection(post_id):
+def update_db_connection(post_id):
     connection = get_db_connection()
     cur = connection.cursor()
     cur.execute('UPDATE posts SET connection = connection + 1 WHERE id = ?',
@@ -58,6 +60,9 @@ app.config['SECRET_KEY'] = 'your secret key'
 @app.route('/')
 def index():
     connection = get_db_connection()
+    # Add connection count from homepage view
+    global homepage_view
+    homepage_view += 1
     posts = connection.execute('SELECT * FROM posts').fetchall()
     connection.close()
     return render_template('index.html', posts=posts)
@@ -70,8 +75,8 @@ If the post ID is not found a 404 page is shown
 @app.route('/<int:post_id>')
 def post(post_id):
     post = get_post(post_id)
-    # Increment the db connection
-    increment_db_connection(post_id)
+    # Update the db connection
+    update_db_connection(post_id)
     if post is None:
         # Log accessing non-existing article
         app.logger.info('A non-existing article was accessed! "404"')
