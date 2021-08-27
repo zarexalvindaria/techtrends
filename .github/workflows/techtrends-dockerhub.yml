@@ -27,7 +27,7 @@ jobs:
         with:
           images: |
             name/app
-            ghcr.io/username/app
+            ghcr.io/${{ secrets.DOCKERHUB_USERNAME }}/app
           # generate Docker tags based on the following events/attributes
           tags: |
             type=schedule
@@ -63,4 +63,5 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}:latest
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
