@@ -1,7 +1,9 @@
 import sqlite3
 import logging
-from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
-from werkzeug.exceptions import abort
+from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash, Response
+from werkzeug.exceptions import abort, HTTPException
+
+from http import HTTPStatus
 
 homepage_view = 0
 
@@ -54,7 +56,6 @@ def update_db_connection(post_id):
 # Define the Flask application
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your secret key'
-
 
 # Define the main route of the web application
 @app.route('/')
@@ -121,13 +122,21 @@ def create():
 # Define the Healthcheck endpoint
 @app.route('/healthz')
 def healthz():
-    response = app.response_class(
-        response=json.dumps({"result": "OK - healthy"}),
-        status=200,
-        mimetype='application/json'
-    )
+    try:
+        connection = get_db_connection()
+        connection.execute('SELECT * FROM posts').fetchall()
+        response = app.response_class(
+            response=json.dumps({"result": "OK - healthy"}),
+            status=200,
+            mimetype='application/json'
+        )
+    except sqlite3.OperationalError as err:
+        response = app.response_class(
+            response=json.dumps({"result": "ERROR - unhealthy"}),
+            status=500,
+            mimetype='application/json'
+        )
     return response
-
 
 # Define the metrics endpoint
 @app.route('/metrics')
