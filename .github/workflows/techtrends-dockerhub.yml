@@ -63,5 +63,5 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: zarexalvindara/techtrends:latest
+          tags: zarexalvindaria/techtrends:latest
           #tags: ${{ steps.meta.outputs.tags }}
