@@ -26,8 +26,9 @@ jobs:
         uses: docker/metadata-action@v3
         with:
           images: |
-            name/app
-            ghcr.io/username/app
+            zarexalvindaria/techtrends
+          #  ghcr.io/username/app
+            ghcr.io/zarexalvindaria/techtrends
           # generate Docker tags based on the following events/attributes
           tags: |
             type=schedule
@@ -63,4 +64,4 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: zarexalvindaria/techtrends:${{ steps.meta.outputs.tags }}
+          tags: ${{ steps.meta.outputs.tags }}
