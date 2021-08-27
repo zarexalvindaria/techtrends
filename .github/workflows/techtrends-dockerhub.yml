@@ -26,8 +26,8 @@ jobs:
         uses: docker/metadata-action@v3
         with:
           images: |
-            zarexalvindaria/techtrends
-            ghcr.io/zarexalvindaria/techtrends
+            ${{ secrets.DOCKERHUB_USERNAME }}/techtrends
+            ghcr.io/${{ secrets.DOCKERHUB_USERNAME }}/techtrends
           # generate Docker tags based on the following events/attributes
           tags: |
             type=schedule
