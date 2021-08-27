@@ -27,7 +27,6 @@ jobs:
         with:
           images: |
             zarexalvindaria/techtrends
-          #  ghcr.io/username/app
             ghcr.io/zarexalvindaria/techtrends
           # generate Docker tags based on the following events/attributes
           tags: |
