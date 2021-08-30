@@ -80,7 +80,7 @@ def post(post_id):
     update_db_connection(post_id)
     if post is None:
         # Log accessing non-existing article
-        app.logger.info('A non-existing article was accessed! "404"')
+        app.logger.error('A non-existing article was accessed! "404"')
         return render_template('404.html'), 404
     else:
         # Log accessing existing article
